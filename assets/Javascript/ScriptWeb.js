@@ -12,7 +12,6 @@ document.getUniqueClass('busca').addEventListener('submit', async (event) => {
         lastSearchedCity = input; // Armazena a cidade pesquisada
         clearInfo();
         showWarning('Carregando...');
-        showWarnin
         await fetchWeather(input);
     } else {
         clearInfo();
