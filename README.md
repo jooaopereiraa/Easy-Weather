@@ -1,6 +1,7 @@
 # EasyWeather ⛅
 EasyWeather é uma aplicação web que fornece previsões meteorológicas precisas e em tempo real. Nosso objetivo é oferecer aos usuários informações claras e confiáveis sobre o clima em qualquer lugar do mundo.
 - Versão do Projeto: **v1.0**
+- Pre-Visualização do Projeto: [Website Easy Weather](https://easy-weather-web-site.vercel.app/)
 
 ## Funcionalidades ✨
 - Tempo em Graus Celcius;
