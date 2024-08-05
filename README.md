@@ -5,6 +5,7 @@ EasyWeather é uma aplicação web que fornece previsões meteorológicas precis
 
 ## Features 🎉
 - Troca de ícone do site atualizada.
+- Adaptação para melhor visualização em dispositivos celulares.
 
 ## Funcionalidades ✨
 - Tempo em Graus Celcius;
