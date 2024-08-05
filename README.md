@@ -15,7 +15,6 @@ EasyWeather é uma aplicação web que fornece previsões meteorológicas precis
 ## Tecnologias Utilizadas 💻
 - Frontend: HTML, CSS, JavaScript
 - API: [OpenWeatherMap API](https://openweathermap.org/api)
-- Hospedagem: Vercel
 
 
 ## Instalações 🔌
