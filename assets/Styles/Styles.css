@@ -60,9 +60,9 @@ h1 {
   justify-content: center;
   border: 0;
   background-color: #FFF;
-  ;
   border-radius: 50%;
   width: 45px;
+  height: 45px;
   cursor: pointer;
 
 }
@@ -213,16 +213,11 @@ footer a {
   }
 
   .busca {
-    width: 280px;
+    width: fit-content;
   }
 
   .busca img {
     width: 15px;
-  }
-
-  .busca button {
-    width: 47px;
-
   }
 
   .temperatura {
