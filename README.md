@@ -22,7 +22,7 @@ EasyWeather é uma aplicação web que fornece previsões meteorológicas precis
 Clone o repositório:
 
 ```sh
-git clone https://github.com/DevVictor02/EasyWeather-WebSite.git
+git clone https://github.com/DevVictor02/Easy-Weather.git
 ```
 
 Navegue até o diretório do projeto:
