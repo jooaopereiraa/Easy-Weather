@@ -3,6 +3,8 @@ EasyWeather é uma aplicação web que fornece previsões meteorológicas precis
 - Versão do Projeto: **v1.1**
 - Pre-Visualização do Projeto: [Website Easy Weather](https://easy-weather-web-site.vercel.app/)
 
+![Weather APP](assets/screenshot/screenshot.png)
+
 ## Features 🎉
 - Troca de ícone do site atualizada.
 - Adaptação para melhor visualização em dispositivos celulares.
