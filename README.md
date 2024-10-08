@@ -55,4 +55,4 @@ git push origin minha-nova-feature
 Abra um pull request.
 
 ## Contato 🎁
-- Me adicione no Discord: techpereiraa.jsx
+- Me adicione no Discord: bruhpereiraa
