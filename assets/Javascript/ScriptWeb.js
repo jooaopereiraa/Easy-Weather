@@ -1,56 +1,69 @@
+const API_KEY = 'ef60a79c9c3ca99f2edfad01fd9badb3';
+const API_URL = 'https://api.openweathermap.org/data/2.5/weather';
+
 let lastSearchedCity = 'Brasilia';
 
 Document.prototype.getUniqueClass = function(className) {
     return this.getElementsByClassName(className)[0];
 };
 
+document.getUniqueClass('busca').addEventListener('submit', handleFormSubmit);
 
-document.getUniqueClass('busca').addEventListener('submit', async (event) => {
+async function handleFormSubmit(event) {
     event.preventDefault();
-    let input = document.getElementById('searchInput').value;
-    if (input !== '') {
-        lastSearchedCity = input; // Armazena a cidade pesquisada
+    const input = document.getElementById('searchInput').value.trim();
+    if (input) {
+        lastSearchedCity = input;
         clearInfo();
         showWarning('Carregando...');
         await fetchWeather(input);
     } else {
         clearInfo();
     }
-});
+}
 
 async function fetchWeather(city) {
-    let url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURI(city)}&appid=ef60a79c9c3ca99f2edfad01fd9badb3&units=metric&lang=pt_br`;
+    try {
+        const response = await fetch(`${API_URL}?q=${encodeURIComponent(city)}&appid=${API_KEY}&units=metric&lang=pt_br`);
+        const data = await response.json();
 
-    let results = await fetch(url);
-    let json = await results.json();
-
-    if (json.cod === 200) {
-        showInfo({
-            name: json.name,
-            country: json.sys.country,
-            temp: json.main.temp,
-            tempIcon: json.weather[0].icon,
-            windSpeed: json.wind.speed,
-            descri: json.weather[0].description,
-        });
-    } else {
-        clearInfo();
-        showWarning('Não encontramos essa localização');
+        if (data.cod === 200) {
+            const tempKelvin = (data.main.temp + 273.15).toFixed(2);
+            displayWeatherInfo({
+                name: data.name,
+                country: data.sys.country,
+                temp: data.main.temp,
+                tempKelvin,
+                icon: data.weather[0].icon,
+                windSpeed: data.wind.speed,
+                description: data.weather[0].description,
+            });
+        } else {
+            handleWeatherError();
+        }
+    } catch (error) {
+        handleWeatherError();
     }
 }
 
-function showInfo(json) {
+function displayWeatherInfo({ name, country, temp, tempKelvin, icon, windSpeed, description }) {
     showWarning('');
-    document.getUniqueClass('resultado').style.display = 'block';
-    document.getUniqueClass('titulo').innerHTML = `${json.name}, ${json.country}`;
-    document.getUniqueClass('temperatura').innerHTML = `${json.temp} ºC`;
-    document.getUniqueClass('ventoInfo').innerHTML = `${json.windSpeed} <span>km/h</span>`;
-    document.getUniqueClass('tempInfo').innerHTML = `${json.descri}`;
-    document.querySelector('.informacoes img').setAttribute('src', `assets/Images/${json.tempIcon}.gif`);
+    const resultElement = document.getUniqueClass('resultado');
+    resultElement.style.display = 'block';
+    document.getUniqueClass('titulo').innerHTML = `${name}, ${country}`;
+    document.getUniqueClass('temperatura').innerHTML = `${temp} ºC (${tempKelvin} K)`;
+    document.getUniqueClass('ventoInfo').innerHTML = `${windSpeed} <span>km/h</span>`;
+    document.getUniqueClass('tempInfo').innerHTML = description;
+    document.querySelector('.informacoes img').setAttribute('src', `assets/Images/${icon}.gif`);
 }
 
-function showWarning(msg) {
-    document.getUniqueClass('aviso').innerHTML = msg;
+function handleWeatherError() {
+    clearInfo();
+    showWarning('Não encontramos essa localização');
+}
+
+function showWarning(message) {
+    document.getUniqueClass('aviso').innerHTML = message;
 }
 
 function clearInfo() {
@@ -59,7 +72,7 @@ function clearInfo() {
 }
 
 async function updateWeather() {
-    if (lastSearchedCity !== '') {
+    if (lastSearchedCity) {
         await fetchWeather(lastSearchedCity);
     }
 }
